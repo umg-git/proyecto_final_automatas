@@ -63,6 +63,44 @@ Ejemplo: q0,1→q1,0,R
                 </div>
             </div>
 
+            <!-- Elizabeth -->
+             <!-- Seccion de botones, para interactuar con la maquina, como paso, ejecutar y reinicia -->
+            <div class="button-group">
+                <button onclick="initializeMachine()">Inicializar</button>
+                <button onclick="step()">Paso</button>
+                <button onclick="run()">Ejecutar</button>
+                <button onclick="reset()">Reiniciar</button>
+            </div>
+
+            <!-- Cinta de la maquina -->
+            <div class="tape-container">
+                <div class="section-title">Cinta de la Máquina</div>
+                <div class="tape" id="tape"></div>
+            </div>
+
+            <!-- indica el estado de la maquina -->
+            <div class="status-panel">
+                <div class="status-item">
+                    <div class="status-label">Estado Actual</div>
+                    <div class="status-value" id="current-state">-</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">Posición</div>
+                    <div class="status-value" id="head-position">-</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">Pasos</div>
+                    <div class="status-value" id="step-count">0</div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">Estado</div>
+                    <div class="status-value" id="machine-status">Detenida</div>
+                </div>
+            </div>
+
+            <!-- Pantalla pra logs -->
+        <div class="section-title">Log de Ejecución</div>
+            <div class="log" id="log"></div>
         </div>
     </div>
 
