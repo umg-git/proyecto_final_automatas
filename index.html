@@ -1,1 +1,70 @@
+<!-- Heldriss -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Simulador de Máquina de Turing</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Simulador de Máquina de Turing</h1>
+            <p>Grupo #0</p>
+        </div>
 
+        <div class="main-content">
+            <div class="control-panel">
+                <div class="input-section">
+                    <div class="section-title">Configuración</div>
+                    
+                    <div class="input-group">
+                        <label for="input-string">Cadena de entrada:</label>
+                        <input type="text" id="input-string" placeholder="Ej: 0110" value="0110">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="initial-state">Estado inicial:</label>
+                        <input type="text" id="initial-state" placeholder="Ej: q0" value="q0">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="final-states">Estados finales (separados por comas):</label>
+                        <input type="text" id="final-states" placeholder="Ej: qf" value="qf">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="blank-symbol">Símbolo en blanco:</label>
+                        <input type="text" id="blank-symbol" placeholder="Ej: _" value="_" maxlength="1">
+                    </div>
+                </div>
+
+                <div class="rules-section">
+                    <div class="section-title">Reglas de Transición</div>
+                    
+                    <div class="input-group">
+                        <textarea id="transition-rules" placeholder="Una regla por línea">q0,0→q0,0,R
+q0,1→q1,1,R
+q1,0→q1,0,R
+q1,1→q0,1,R
+q0,_→qf,_,L
+q1,_→qf,_,L</textarea>
+                    </div>
+
+                    <div class="example-rules">
+                        <h4>Formato de reglas:</h4>
+                        <pre>estado_actual,símbolo_leído→nuevo_estado,símbolo_escribir,dirección
+
+Ejemplo: q0,1→q1,0,R
+- Desde estado q0, si lee '1'
+- Cambia a estado q1, escribe '0', mueve a la derecha (R/L)</pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
