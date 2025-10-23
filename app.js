@@ -1,5 +1,5 @@
-class TuringMachine{
-    constructor(){
+class TuringMachine {
+    constructor() {
         this.tape = []; //representa la cinta
         this.headPosition = 0; // posicio del cabezal
         this.currentState = ''; // estado actual de la maquina
@@ -13,7 +13,7 @@ class TuringMachine{
     }
 
     //inicializa los valores
-    initialize(input, initialState, finalStates, blankSymbol, rules){
+    initialize(input, initialState, finalStates, blankSymbol, rules) {
         this.tape = Array.from(input || '');
         this.headPosition = 0;
         this.currentState = initialState;
@@ -45,7 +45,7 @@ class TuringMachine{
         return this.tape[this.headPosition] || this.blankSymbol;
     }
 
-        //metodo para ejecutar paso por paso la maquina
+    //metodo para ejecutar paso por paso la maquina
     step() {
         if (this.isHalted) {
             this.log('La máquina ya se ha detenido');
@@ -176,3 +176,62 @@ class TuringMachine{
     }
 
 }//end class
+
+const machine = new TuringMachine();
+
+function initializeMachine() {
+    const input = document.getElementById('input-string').value;
+    const initialState = document.getElementById('initial-state').value;
+    const finalStatesStr = document.getElementById('final-states').value;
+    const blankSymbol = document.getElementById('blank-symbol').value || '_';
+    const rulesStr = document.getElementById('transition-rules').value;
+
+    if (!initialState) {
+        alert('Por favor, especifica un estado inicial');
+        return;
+    }
+
+    const finalStates = finalStatesStr.split(',').map(s => s.trim()).filter(s => s);
+    const rules = rulesStr.split('\n').map(r => r.trim()).filter(r => r && r.includes('→'));
+
+    if (rules.length === 0) {
+        alert('Por favor, especifica al menos una regla de transición');
+        return;
+    }
+
+    machine.initialize(input, initialState, finalStates, blankSymbol, rules);
+}
+
+function step() {
+    machine.step();
+}
+
+function run() {
+    if (machine.isHalted) {
+        machine.log('⛔ La máquina ya se ha detenido');
+        return;
+    }
+
+    machine.isRunning = true;
+    machine.updateStatus();
+
+    function runStep() {
+        if (machine.step() && !machine.isHalted) {
+            setTimeout(runStep, 500); // Pausa de 500ms entre pasos
+        } else {
+            machine.isRunning = false;
+            machine.updateStatus();
+        }
+    }
+
+    runStep();
+}
+
+function reset() {
+    machine.reset();
+}
+
+// Inicializar con ejemplo por defecto
+window.onload = function () {
+    initializeMachine();
+};
